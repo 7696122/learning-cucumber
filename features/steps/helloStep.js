@@ -5,26 +5,25 @@ const { expect } = require("chai");
 const driver = new Builder().forBrowser("chrome").build();
 
 Given("I am on the Google search page", async function () {
-  await driver.get("http://www.google.com");
+  await driver.get("https://www.google.com");
 });
 
-When("I search for {sring}", async function (searchTerm) {
-  const element = await driver.findElement(By.name("q"));
-  element.sendKeys(searchTerm, Key.RETERN);
-  element.submit();
+When("I search for {string}", async function (searchTerm) {
+  driver.findElement(By.name("q")).sendKeys(searchTerm, Key.ENTER);
 });
 
 Then(
-  "Then the page title should start with {sring}",
+  "Then the page title should start with {string}",
   { timeout: 60 * 1000 },
   async function (searchTerm) {
     const title = await driver.getTitle();
     const isTitleStartWithCheese =
       title.toLowerCase().lastIndexOf(`${searchTerm}`, 0) === 0;
-    expect(isTitleStartWithCheese).to.equal(true);
+
+    expect(isTitleStartWithCheese).to.be.true;
   }
 );
 
-AfterAll("end", async function () {
-  await driver.quit();
+AfterAll({}, async function () {
+  driver.quit();
 });

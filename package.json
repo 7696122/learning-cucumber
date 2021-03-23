@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "test": "cucmber",
     "start": "serve dist",
     "dev": "parcel src/index.html -- open",
     "build": "parcel build src/index.html",
