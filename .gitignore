@@ -3,3 +3,4 @@
 /.env
 /.cache/
 /dist/
+/yarn-error.log
